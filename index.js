@@ -1,7 +1,9 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
+const manager = require('./lib:/manager');
+const managerArray = []
 
-const generateHTML = ({ managerName, jobTitle, employeeID, email, officeNumber, github}) =>
+const generateHTML = ({ name, managerName, jobTitle, employeeID, email, officeNumber, github, teamMember}) =>
  `<!DOCTYPE html>
  <html lang="en">
  <head>
@@ -64,10 +66,97 @@ const generateHTML = ({ managerName, jobTitle, employeeID, email, officeNumber, 
             name: 'github',
             message: 'Please enter your github: ',
         },
+        {
+            type: 'list',
+            name: 'teamMember',
+            message: 'Would you like to add another member to your team or complete your team?',
+            choices: ['Engineer', 'Intern', 'Complete'],
+        },
     ])
     .then((responses) => {
         const htmlPage = generateHTML(responses);
+        // if (responses === 'Engineer') {
+        //     return 
+        // }
 
         fs.writeFile('index.html', htmlPage, (err) =>
             err ? console.log(err) : console.log('You have successfully generated a Team Profile!'))
     })
+
+    //This function will complete the team roster generator
+    function finish() {
+        return inquirer.prompt(
+            {
+                type: 'list',
+                name: 'teamMember',
+                message: 'Would you like to add another member to your team or complete your team?',
+                choices: ['Engineer', 'Intern', 'Complete'],
+            },
+        )
+        .then((reponses) => {
+            if (reponses === 'Engineer') {
+                return addEngineer();
+            } else if (reponses === 'Intern') {
+                return addIntern();
+            } else {
+                return generateHTML();
+            }
+        })
+    }
+
+    function addManager() {
+        return inquirer.prompt(
+            [
+                {
+                    type: 'input',
+                    name: 'managerName',
+                    message: 'Please enter the team manager name: ',
+                },
+                {
+                    type: 'input',
+                    name: 'employeeID',
+                    message: 'Please enter their employee ID: ',
+                },
+                {
+                    type: 'input',
+                    name: 'email',
+                    message: 'Please enter their email: ',
+                },
+                {
+                    type: 'input',
+                    name: 'officeNumber',
+                    message: 'Please enter their office number: ',
+                },
+            ])
+            .then((reponses) => {
+                const newManager = new manager(responses.managerName, reponses.employeeID, reponses.email, reponses.officeNumber) 
+                managerArray.push(newManager);
+                finish();
+            })
+    }
+
+    function addIntern() {
+        return inquirer.prompt(
+            [
+                {
+                    type: 'input',
+                    name: 'managerName',
+                    message: 'Please enter the interns name: ',
+                },
+                {
+                    type: 'input',
+                    name: 'employeeID',
+                    message: 'Please enter their employee ID: ',
+                },
+                {
+                    type: 'input',
+                    name: 'email',
+                    message: 'Please enter their email: ',
+                },
+                {
+                    type: 'input',
+                    name: 'school',
+                    message: 'Please enter their school: ',
+                },
+            ])
+    }
