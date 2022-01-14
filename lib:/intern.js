@@ -6,10 +6,10 @@ class Intern extends employee {
         }
    
     getRole() {
-        return 'Engineer';
+        return 'Intern';
     }
     getSchool() {
-        return 'School';
+        return this.school;
     }
 }
 

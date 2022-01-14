@@ -7,41 +7,61 @@ const employee = require('./lib:/employee')
 const employeeArray = [];
 
 
-    function generateHTML(employeeArray) {
-        const manager = employeeArray[0]
-
-        function generateEmployeeHTML(employees) {
-            let html = "";
-            for (const i = 1; i <= employeeArray.length; i++) {
-                if (employeeArray)
-                html = html + 
-                `<div class="manager-profile-card">
+function generateEmployeeHTML(employee) {
+    console.log(employeeArray);
+    let html
+    for (let i = 0; i < employeeArray.length; i++) {
+        // function generateEmployeeHTML(employees) {
+        //     let html = "";
+        console.log(employeeArray[i]);
+        const role = employeeArray[i].getRole();
+            if (role === 'Engineer') {
+                html = html +
+                    `<div class="manager-profile-card">
                 <div class="card-header">
                     <h3>${employeeArray[i].name}</h3>
                 </div>
                 <div class="card-details">
                     <p>ID: ${employeeArray[i].id}</p>
                     <p>Email: <a href="mailto:${employeeArray[i].email}">${employeeArray[i].email}</a></p>
-                    <p>Office Num: ${memployeeArray[i].name}</p>
+                    <p>Office Num: ${employeeArray[i].name}</p>
                 </div>
-                </div>`
-            }
-        }
+                </div>`}
+            else if (role === "Intern") {
+                html = html +
+                `<div class="manager-profile-card">
+                    <div class="card-header">
+                        <h3>${employeeArray[i].name}</h3>
+                    </div>
+                    <div class="card-details">
+                        <p>ID: ${employeeArray[i].id}</p>
+                        <p>Email: <a href="mailto:${employeeArray[i].email}">${employeeArray[i].email}</a></p>
+                        <p>School: ${employeeArray[i].school}</p>
+                    </div>
+                    </div>`
+        } 
+        
+    }
+    return html;
+}
 
-        function generateManagerHTML(manager) {
-            return `<div class="manager-profile-card">
+function generateManagerHTML() {
+    const manager = employeeArray[0];
+    return `<div class="manager-profile-card">
             <div class="card-header">
-                <h3>${manager.name}</h3>
+                <h3>${manager.getName()}</h3>
             </div>
             <div class="card-details">
-                <p>ID: ${manager.id}</p>
-                <p>Email: <a href="mailto:${manager.email}">${manager.email}</a></p>
-                <p>Office Num: ${manager.officeNumber}</p>
+                <p>ID: ${manager.getId()}</p>
+                <p>Email: <a href="mailto:${manager.getEmail()}">${manager.getEmail()}</a></p>
+                <p>Office Num: ${manager.getOfficeNumber()}</p>
             </div>
             </div>`
+}
 
-        }
-        return ` <!DOCTYPE html>
+//This function generates the base/root HTML file
+function generateHTML() {
+    return ` <!DOCTYPE html>
         <html lang="en">
         <head>
             <meta charset="UTF-8">
@@ -55,20 +75,14 @@ const employeeArray = [];
             </header>
         
         <body>
-            ${generateManagerHTML(manager)}
+            ${generateManagerHTML()}
+            ${generateEmployeeHTML()}
         </body>
         </html>`
-    }
-addManager()
-// .then((responses) => {
-//     const htmlPage = generateHTML(responses);
-//     // if (responses === 'Engineer') {
-//     //     return 
-//     // }
+}
 
-//     fs.writeFile('index.html', htmlPage, (err) =>
-//         err ? console.log(err) : console.log('You have successfully generated a Team Profile!'))
-// })
+//Calls out the add manager function
+addManager()
 
 //This function will complete the team roster generator
 function finish() {
@@ -87,11 +101,12 @@ function finish() {
                 return addIntern();
             } else {
                 fs.writeFile('index.html', generateHTML(employeeArray), (err) =>
-                err ? console.log(err) : console.log('You have successfully generated a Team Profile!'))
+                    err ? console.log(err) : console.log('You have successfully generated a Team Profile!'))
             }
         })
 }
 
+//This function will generate prompts to add a manager
 function addManager() {
     return inquirer.prompt(
         [
@@ -123,6 +138,7 @@ function addManager() {
         })
 }
 
+//This function will generate prompts to add an engineer
 function addEngineer() {
     return inquirer.prompt(
         [
@@ -154,6 +170,7 @@ function addEngineer() {
         })
 }
 
+//This function will generate prompts to add an intern
 function addIntern() {
     return inquirer.prompt(
         [
@@ -183,4 +200,4 @@ function addIntern() {
             employeeArray.push(newIntern);
             finish();
         })
-}
+    }
