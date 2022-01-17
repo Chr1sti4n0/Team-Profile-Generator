@@ -6,60 +6,60 @@ const Engineer = require('./lib:/Engineer');
 const employee = require('./lib:/employee')
 const employeeArray = [];
 
-
+//This function generates the HTML for the engineer or intern team members depending on which is selected in the terminal
 function generateEmployeeHTML(employee) {
-    console.log(employeeArray);
+    //console.log(employeeArray);
     let html
     for (let i = 0; i < employeeArray.length; i++) {
-        // function generateEmployeeHTML(employees) {
-        //     let html = "";
         console.log(employeeArray[i]);
         const role = employeeArray[i].getRole();
-            if (role === 'Engineer') {
-                html = html +
-                    `<div class="manager-profile-card">
-                <div class="card-header">
-                    <h3>${employeeArray[i].name}</h3>
-                </div>
-                <div class="card-details">
-                    <p>ID: ${employeeArray[i].id}</p>
-                    <p>Email: <a href="mailto:${employeeArray[i].email}">${employeeArray[i].email}</a></p>
-                    <p>Office Num: ${employeeArray[i].name}</p>
-                </div>
-                </div>`}
-            else if (role === "Intern") {
-                html = html +
-                `<div class="manager-profile-card">
+        if (role === 'Engineer') {
+            html = html + `<div class="engineer-profile-card">
                     <div class="card-header">
-                        <h3>${employeeArray[i].name}</h3>
+                        <h3>${employeeArray[i].getName()}</h3>
+                        <h3>${employeeArray[i].getRole()}</h3>
                     </div>
                     <div class="card-details">
-                        <p>ID: ${employeeArray[i].id}</p>
-                        <p>Email: <a href="mailto:${employeeArray[i].email}">${employeeArray[i].email}</a></p>
-                        <p>School: ${employeeArray[i].school}</p>
+                        <p>ID: ${employeeArray[i].getId()}</p>
+                        <p>Email: <a href="mailto:${employeeArray[i].getEmail()}">${employeeArray[i].getEmail()}</a></p>
                     </div>
-                    </div>`
-        } 
-        
+                </div>`
+
+        } else if (role === "Intern") {
+            html = html +
+                `<div class="intern-profile-card">
+                    <div class="card-header">
+                        <h3>${employeeArray[i].getName()}</h3>
+                        <h3>${employeeArray[i].getRole()}</h3>
+                    </div>
+                    <div class="card-details">
+                        <p>ID: ${employeeArray[i].getId()}</p>
+                        <p>Email: <a href="mailto:${employeeArray[i].getEmail()}">${employeeArray[i].getEmail()}</a></p>
+                        <p>School: ${employeeArray[i].getSchool()}</p>
+                    </div>
+                </div>`
+        }
+
     }
     return html;
 }
 
+//This function generates the HTML for the manager card
 function generateManagerHTML() {
     const manager = employeeArray[0];
     return `<div class="manager-profile-card">
-            <div class="card-header">
-                <h3>${manager.getName()}</h3>
-            </div>
-            <div class="card-details">
-                <p>ID: ${manager.getId()}</p>
-                <p>Email: <a href="mailto:${manager.getEmail()}">${manager.getEmail()}</a></p>
-                <p>Office Num: ${manager.getOfficeNumber()}</p>
-            </div>
-            </div>`
-}
+                <div class="card-header">
+                    <h3>${manager.getName()}</h3>
+                    <h3>${manager.getRole()}</h3>
+                </div>
+                <div class="card-details">
+                    <p>ID: ${manager.getId()}</p>
+                    <p>Email: <a href="mailto:${manager.getEmail()}">${manager.getEmail()}</a></p>
+                    <p>Office Num: ${manager.getOfficeNumber()}</p>
+                </div>
+            </div>` }
 
-//This function generates the base/root HTML file
+//This function generates the base/root of the HTML file
 function generateHTML() {
     return ` <!DOCTYPE html>
         <html lang="en">
@@ -196,8 +196,8 @@ function addIntern() {
             },
         ])
         .then((responses) => {
-            const newIntern = new intern(responses.name, responses.employeeID, responses.email, responses.school)
+            const newIntern = new intern(responses.internName, responses.employeeID, responses.email, responses.school)
             employeeArray.push(newIntern);
             finish();
         })
-    }
+}

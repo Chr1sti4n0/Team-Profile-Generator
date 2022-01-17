@@ -8,10 +8,29 @@ header {
     margin: 10px;
 }
 
+body {
+    display: inline;
+}
+
 .manager-profile-card {
     box-shadow: 0 2px 4px 0px;
     width: 25%;
     padding: 15px;
+    display: inline-block;
+}
+
+.engineer-profile-card {
+    box-shadow: 0 2px 4px 0px;
+    width: 25%;
+    padding: 15px;
+    display: inline-block;
+}
+
+.intern-profile-card {
+    box-shadow: 0 2px 4px 0px;
+    width: 25%;
+    padding: 15px;
+    display: inline-block;
 }
 
 .card-header {

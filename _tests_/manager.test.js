@@ -1,9 +1,22 @@
 const manager = require("../lib:/manager");
 
-  describe("manager", () => {
-    it("should should display the managers name, email, employee ID and office number", () => {
-      const managerCard = "";
-
-      expect().toEqual();
+describe("manager", () => {
+    it("should set office number through constructor", () => {
+        const execute = new manager();
+        expect(execute.officeNumber).toEqual("15");
+      });
+          
+    describe("get Role", () => {
+        it("should return manager", () => {
+            const execute = new manager();
+            expect(execute.getRole()).toEqual("manager");
+        });
     });
-  });
+    
+    describe("get officeNumber", () => {
+        it("should get office number through getOfficeNumber()", () => {
+            const execute = new manager();
+            expect(execute.getOfficeNumber()).toEqual("15");
+        });
+    });
+});
