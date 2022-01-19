@@ -14,7 +14,7 @@ function generateEmployeeHTML(employee) {
         console.log(employeeArray[i]);
         const role = employeeArray[i].getRole();
         if (role === 'Engineer') {
-            html = html + `<div class="engineer-profile-card">
+            html = `<div class="engineer-profile-card">
                     <div class="card-header">
                         <h3>${employeeArray[i].getName()}</h3>
                         <h3>${employeeArray[i].getRole()}</h3>
@@ -22,6 +22,7 @@ function generateEmployeeHTML(employee) {
                     <div class="card-details">
                         <p>ID: ${employeeArray[i].getId()}</p>
                         <p>Email: <a href="mailto:${employeeArray[i].getEmail()}">${employeeArray[i].getEmail()}</a></p>
+                        <p>GitHub: <a href="https://github.com/${employeeArray[i].getGithub()}">${employeeArray[i].getGithub()}</a></p>
                     </div>
                 </div>`
 

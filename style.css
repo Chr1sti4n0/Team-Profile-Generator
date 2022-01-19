@@ -17,6 +17,7 @@ body {
     width: 25%;
     padding: 15px;
     display: inline-block;
+    margin: 10px;
 }
 
 .engineer-profile-card {
@@ -24,6 +25,7 @@ body {
     width: 25%;
     padding: 15px;
     display: inline-block;
+    margin: 10px;
 }
 
 .intern-profile-card {
@@ -31,6 +33,7 @@ body {
     width: 25%;
     padding: 15px;
     display: inline-block;
+    margin: 10px;
 }
 
 .card-header {
