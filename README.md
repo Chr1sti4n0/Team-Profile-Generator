@@ -5,13 +5,14 @@
   *[Installation](#installation)
   *[Usage](#usage)
   *[Tests](#tests)
+  *[Vimeo](#vimeo)
 
   <a name='description'></a>
 
   ## Description 
   This project involves the use of the inquirer, construction of classes and test.js files to generate a program that will allow the user to create an engineering team using the terminal in VS Code. 
 
-  ![image](https://user-images.githubusercontent.com/92955084/149685593-144e4c37-7aa0-448c-b754-377bb80f145d.png)
+  ![image](https://user-images.githubusercontent.com/92955084/150069710-3ad2a901-6564-4973-8ceb-82fed304ee74.png)
 
 #
   <a name='installation'></a>
@@ -31,7 +32,12 @@
   <a name='tests'></a>
 
   ## Tests
-  npm test
+  npm run test
 
 #
+  <a name='vimeo'></a>
+
   ## Vimeo Demo
+  https://vimeo.com/667612617
+  
+
